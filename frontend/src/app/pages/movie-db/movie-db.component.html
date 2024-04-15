@@ -1,0 +1,19 @@
+<h1 style="margin-top: 50px; text-align: center;">Liste des Films</h1>
+
+<div class="movies-container">
+    <!-- boucle sur chaque film dans la liste des films -->
+    <div *ngFor="let movie of movies" class="movie-card">
+        <!-- concaténation de l'url de base pour avoir le chemin de l'affiche du film. -->
+        <img [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path.substring(1)" alt="{{ movie.title }}"
+            class="movie-image">
+        <div class="movie-info">
+            <h3 class="movie-title">{{ movie.title }}</h3>
+            <p class="movie-release-date">{{ movie.release_date | date: 'mediumDate' }}</p>
+        </div>
+    </div>
+</div>
+
+<!-- composant de défilement infini pour charger plus de films -->
+<div infinite-scroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="onScroll()">
+    Chargez plus...
+</div>
